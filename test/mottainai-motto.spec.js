@@ -15,7 +15,7 @@ jest.setTimeout(60000);
 const itTemeOutSecounds = 1000 * 60
     
 // テストグループ
-describe("デモ", () => {
+describe("もったいないもっとテスト", () => {
   
   beforeAll(() => {
         // driverを取得します
@@ -32,13 +32,13 @@ describe("デモ", () => {
   it("サイトルートの疎通テスト", async () => {
     
     generalUtil.InfoLog("サイトルートの疎通テスト開始");
-    await driver.get("https://n-ippo.jp/");
+    await driver.get("https://mottainai-motto.jp/");
 
     // トップページのロード待ち
     //await driver.wait(until.titleContains('セキュリテ - インパクト投資プラットフォーム'), 10000);
     
     await driver.getTitle().then(function (title) {
-      expect(title).toBe("にいがた、いっぽ　新しいことを始めたいあなたと、夢のあるプロジェクトを応援したいあなたをつなぎます。");
+      expect(title).toBe("MOTTAINAIもっと");
     });
 
     generalUtil.InfoLog("サイトルートの疎通テスト完了");
@@ -52,7 +52,7 @@ describe("デモ", () => {
     generalUtil.InfoLog("ログインページの疎通テスト開始");
 
     // ログインのリンク要素
-    var aButton = await driver.findElement(By.xpath("/html/body/header/div/div/div/span/a[2]"));
+    var aButton = await driver.findElement(By.xpath('//*[@id="main_header"]/div/div/div/span/a[2]'));
     var href = await aButton.getAttribute("href");
 
     // クリック遷移待ち
@@ -103,7 +103,7 @@ describe("デモ", () => {
     await driver.findElement(By.xpath('//*[@id="registration-page"]/div[1]/div/div[2]/div/div[3]/div[3]/ul/li[2]/input')).sendKeys(process.env.CF_MAIL_DOMAIN);
     await driver.findElement(By.xpath('//*[@id="registration-page"]/div[1]/div/div[2]/div/div[5]/div[3]/button')).click();
 
-    const successUrl = "https://n-ippo.jp/member/recover/login/thanks";
+    const successUrl = "https://mottainai-motto.jp/member/recover/login/thanks";
     await driver.wait(until.urlIs(successUrl), itTemeOutSecounds);
     
     // URL一致で疎通確認
