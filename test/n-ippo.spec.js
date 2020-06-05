@@ -32,7 +32,7 @@ describe("デモ", () => {
     generalUtil.InfoLog("トップページアクセス");
     
     // テスト対象のページへアクセス
-    await driver.get("https://www.securite.jp");
+    await driver.get("https://www.securit.jp");
 
     // トップページのロード待ち
     //await driver.wait(until.titleContains('セキュリテ - インパクト投資プラットフォーム'), 10000);
