@@ -29,16 +29,13 @@ describe("デモ", () => {
    */
   it("サイトルートの疎通試験", async () => {
     
-    generalUtil.InfoLog("トップページアクセス");
-    
-    // テスト対象のページへアクセス
-    await driver.get("https://www.securit.jp");
+    generalUtil.InfoLog("サイトルート");
+    await driver.get("https://n-ippo.jp/");
 
     // トップページのロード待ち
     //await driver.wait(until.titleContains('セキュリテ - インパクト投資プラットフォーム'), 10000);
     
     await driver.getTitle().then(function (title) {
-      // @test title is match?
       expect(title).toBe("セキュリテ - インパクト投資プラットフォーム");
     });
   });
