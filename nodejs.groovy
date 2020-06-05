@@ -1,8 +1,8 @@
 job('NodeJS Job2') {
     scm {
-        git('https://github.com/NotReady/jenkinsexample.git') {  node ->
+        git('https://github.com/NotReady/cf_test.git') {  node ->
             node / gitConfigName('DSL User')
-            node / gitConfigEmail('jenkins-dsl@example.com')
+            node / gitConfigEmail('loreley.lala+jenkins_work@gmail.com')
         }
     }
     triggers {
@@ -13,7 +13,6 @@ job('NodeJS Job2') {
     }
     steps {
         shell("npm install")
-        shell("pretest_e2e")
         shell("npm test")
     }
 }
