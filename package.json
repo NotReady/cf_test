@@ -1,0 +1,31 @@
+{
+  "name": "devops_sample_nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest",
+    "install-chromedriver": "node node_modules/chromedriver/install.js",
+    "pretest_e2e": "npm run install-chromedriver"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chromedriver": "^77.0.0",
+    "date-and-time": "^0.10.0",
+    "date-util": "^1.2.1",
+    "fs-extra": "^8.1.0",
+    "jest": "^23.6.0",
+    "path": "^0.12.7",
+    "resemblejs": "^3.2.2",
+    "selenium-webdriver": "^4.0.0-alpha.3"
+  },
+  "jest": {
+    "verbose": true
+  },
+  "dependencies": {
+    "gm": "^1.23.1"
+  }
+}
