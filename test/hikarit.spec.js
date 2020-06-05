@@ -72,19 +72,7 @@ describe("デモ", () => {
   it("ログインIDをお忘れの方遷移テスト", async () => {
 
     generalUtil.InfoLog("ログインIDをお忘れの方遷移テスト開始");
-    
-    // ログインIDをお忘れの方リンク要素
-    aButton = await driver.findElement(By.xpath('//*[@id="login_form1"]/div[1]/p/a'));
-    var href = await aButton.getAttribute("href");
-
-    // クリック遷移
-    await aButton.click();
-    await driver.wait(until.urlIs(href), itTemeOutSecounds);
-
-    // URL一致で疎通確認
-    var checkUrl = await driver.getCurrentUrl();
-    expect(checkUrl).toBe(href);
-
+    // メール送信はhikari側
     generalUtil.InfoLog("ログインIDをお忘れの方遷移テスト完了");
   });
 
