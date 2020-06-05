@@ -12,6 +12,8 @@ let driver;
  */
 jest.setTimeout(60000);
 
+const itTemeOutSecounds = 1000 * 60
+    
 // テストグループ
 describe("デモ", () => {
   
@@ -57,6 +59,8 @@ describe("デモ", () => {
     await aButton.click();
     var checkUrl = await driver.getCurrentUrl();
 
+    await driver.wait(until.urlIs(checkUrl), itTemeOutSecounds);
+    
     // URL一致で疎通確認
     expect(checkUrl).toBe(href);
 
@@ -78,12 +82,33 @@ describe("デモ", () => {
     await aButton.click();
     var checkUrl = await driver.getCurrentUrl();
 
+    await driver.wait(until.urlIs(checkUrl), itTemeOutSecounds);
+    
     // URL一致で疎通確認
     expect(checkUrl).toBe(href);
 
     generalUtil.InfoLog("ログインIDをお忘れの方遷移テスト完了");
   });
 
+  /**
+   * @note ログインIDリマインダーでメール疎通を検証します
+   */
+  it("メール疎通テスト", async () => {
 
+    generalUtil.InfoLog("メール疎通テスト開始");
+    
+    // ログインフォームを入力してログイン
+    await driver.findElement(By.xpath('//*[@id="registration-page"]/div[1]/div/div[2]/div/div[2]/div[3]/input')).sendKeys(process.env.TEST_ID);
+    await driver.findElement(By.xpath('//*[@id="registration-page"]/div[1]/div/div[2]/div/div[2]/div[3]/span/select')).sendKeys(process.env.TEST_PW);
+    await driver.findElement(By.xpath('//*[@id="registration-page"]/div[1]/div/div[2]/div/div[2]/div[3]/span/span/select')).sendKeys(process.env.TEST_PW);
+    await driver.findElement(By.xpath('//*[@id="registration-page"]/div[1]/div/div[2]/div/div[3]/div[3]/ul/li[1]/input')).sendKeys(process.env.TEST_PW);
+    await driver.findElement(By.xpath('//*[@id="registration-page"]/div[1]/div/div[2]/div/div[3]/div[3]/ul/li[2]/input')).sendKeys(process.env.TEST_PW);
+    await driver.findElement(By.xpath('document.querySelector("#registration-page > div.container > div > div.span10 > div > div:nth-child(6) > div:nth-child(3) > button")')).click();
+    
+    // URL一致で疎通確認
+    expect(checkUrl).toBe(href);
+
+    generalUtil.InfoLog("メール疎通テストテスト完了");
+  });
   
 });
