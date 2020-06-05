@@ -107,7 +107,7 @@ describe("デモ", () => {
     await driver.findElement(By.xpath('//*[@id="registration-page"]/div[1]/div/div[2]/div/div[2]/div[3]/span/span/select')).sendKeys(process.env.BIRTH_D);
     await driver.findElement(By.xpath('//*[@id="registration-page"]/div[1]/div/div[2]/div/div[3]/div[3]/ul/li[1]/input')).sendKeys(process.env.CF_MAIL_USER);
     await driver.findElement(By.xpath('//*[@id="registration-page"]/div[1]/div/div[2]/div/div[3]/div[3]/ul/li[2]/input')).sendKeys(process.env.CF_MAIL_DOMAIN);
-    await driver.findElement(By.xpath('document.querySelector("#registration-page > div.container > div > div.span10 > div > div:nth-child(6) > div:nth-child(3) > button")')).click();
+    await driver.findElement(By.xpath('//*[@id="registration-page"]/div[1]/div/div[2]/div/div[5]/div[3]/button')).click();
 
     const successUrl = "https://n-ippo.jp/member/recover/login/thanks";
     await driver.wait(until.urlIs(successUrl), itTemeOutSecounds);
