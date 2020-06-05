@@ -55,13 +55,12 @@ describe("デモ", () => {
     var aButton = await driver.findElement(By.xpath("/html/body/header/div/div/div/span/a[2]"));
     var href = await aButton.getAttribute("href");
 
-    // クリック遷移
+    // クリック遷移待ち
     await aButton.click();
-    var checkUrl = await driver.getCurrentUrl();
+    await driver.wait(until.urlIs(href), itTemeOutSecounds);
 
-    await driver.wait(until.urlIs(checkUrl), itTemeOutSecounds);
-    
     // URL一致で疎通確認
+    var checkUrl = await driver.getCurrentUrl();
     expect(checkUrl).toBe(href);
 
     generalUtil.InfoLog("ログインページの疎通テスト完了");
@@ -80,16 +79,45 @@ describe("デモ", () => {
 
     // クリック遷移
     await aButton.click();
-    var checkUrl = await driver.getCurrentUrl();
+    await driver.wait(until.urlIs(href), itTemeOutSecounds);
 
-    await driver.wait(until.urlIs(checkUrl), itTemeOutSecounds);
-    
     // URL一致で疎通確認
+    var checkUrl = await driver.getCurrentUrl();
     expect(checkUrl).toBe(href);
 
     generalUtil.InfoLog("ログインIDをお忘れの方遷移テスト完了");
   });
 
+  /**
+   * @note ログインIDリマインダーでメール疎通を検証します
+   */
+  it("メール疎通テスト", async () => {
+
+    generalUtil.InfoLog("メール疎通テスト開始");
+    
+    generalUtil.InfoLog(process.env.BIRTH_Y);
+    generalUtil.InfoLog(process.env.BIRTH_M);
+    generalUtil.InfoLog(process.env.BIRTH_D);
+    generalUtil.InfoLog(process.env.CF_MAIL_USER);
+    generalUtil.InfoLog(process.env.CF_MAIL_DOMAIN);
+    
+    // ログインフォームを入力してログイン
+    await driver.findElement(By.xpath('//*[@id="registration-page"]/div[1]/div/div[2]/div/div[2]/div[3]/input')).sendKeys(process.env.BIRTH_Y);
+    await driver.findElement(By.xpath('//*[@id="registration-page"]/div[1]/div/div[2]/div/div[2]/div[3]/span/select')).sendKeys(process.env.BIRTH_M);
+    await driver.findElement(By.xpath('//*[@id="registration-page"]/div[1]/div/div[2]/div/div[2]/div[3]/span/span/select')).sendKeys(process.env.BIRTH_D);
+    await driver.findElement(By.xpath('//*[@id="registration-page"]/div[1]/div/div[2]/div/div[3]/div[3]/ul/li[1]/input')).sendKeys(process.env.CF_MAIL_USER);
+    await driver.findElement(By.xpath('//*[@id="registration-page"]/div[1]/div/div[2]/div/div[3]/div[3]/ul/li[2]/input')).sendKeys(process.env.CF_MAIL_DOMAIN);
+    await driver.findElement(By.xpath('document.querySelector("#registration-page > div.container > div > div.span10 > div > div:nth-child(6) > div:nth-child(3) > button")')).click();
+
+    const successUrl = "https://n-ippo.jp/member/recover/login/thanks";
+    await driver.wait(until.urlIs(successUrl), itTemeOutSecounds);
+    
+    // URL一致で疎通確認
+    var checkUrl = await driver.getCurrentUrl();
+    expect(checkUrl).toBe(successUrl);
+
+    generalUtil.InfoLog("メール疎通テストテスト完了");
+  });
 
   
 });
