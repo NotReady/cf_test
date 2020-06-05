@@ -41,7 +41,5 @@ describe("デモ", () => {
       // @test title is match?
       expect(title).toBe("セキュリテ - インパクト投資プラットフォーム");
     });
-
-    await screenshotUtil.takeCapture(driver, 'top', false);
   });
 });
