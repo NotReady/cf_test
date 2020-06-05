@@ -1,4 +1,4 @@
-job('NodeJS Job2') {
+job('n-ippo.jp') {
     scm {
         git('https://github.com/NotReady/cf_test.git') {  node ->
             node / gitConfigName('DSL User')
